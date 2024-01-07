@@ -1,0 +1,71 @@
+/*
+Normal Native css
+Scss
+inline Css
+component libraries -material ui,base ui,ant,chakra
+styled component
+
+ tailwind css framework
+ -css on the go(in the same file)
+ -reusability
+ -less bundle size
+ -flexible Ui (customizations)
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px;
+  border: 1px solid black;
+}
+
+.nav-items > ul {
+  display: flex;
+  list-style-type: none;
+}
+.nav-items > ul > li {
+  padding: 10px;
+}
+.logo {
+  width: 100px;
+}
+.burger {
+  width: 120px;
+}
+.card {
+  width: 150px;
+  border: 1px solid grey;
+  padding: 10px;
+  margin: 10px;
+}
+.card > img {
+  width: 100%;
+}
+.card h2 {
+  margin-top: -2px;
+}
+.card h3 {
+  margin-top: -15px;
+}
+.reatraunt-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cusines-wrap h3 {
+  word-wrap: break-word;
+}
+
+.shimmer-card {
+  width: 200px;
+  height: 300px;
+  background-color: rgb(218, 216, 216);
+  margin: 20px;
+}
+.restaurant-list {
+  display: flex;
+  flex-wrap: wrap;
+} */

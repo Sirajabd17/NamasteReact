@@ -1,20 +1,16 @@
 // import { restrauntList } from "../components/contants";
 import RestrauntCart from "./RestrauntCart";
-import { useEffect, useState } from "react";
-import Shimmer from "./shimmer";
-
-function filterData(searchText, restaurants) {
-  const filterData = restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase()?.includes(searchText.toLowerCase())
-  );
-  return filterData;
-}
+import { useEffect, useState, useContext } from "react";
+import Shimmer from "./Shimmer";
+import { filterData } from "../utils/helper";
+import UserContext from "../utils/UserContext";
 
 const Body = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
+
   const [filterRestaurants, setfilterRestaurants] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const { user, setUser } = useContext(UserContext);
   useEffect(() => {
     getRestaurants();
   }, []);
@@ -23,10 +19,13 @@ const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9358189&lng=77.6178125&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
+
     const json = await data.json();
+    //console.log(json);
 
     const restorantArray =
-      json.data.cards[2].card.card?.gridElements?.infoWithStyle?.restaurants;
+      json.data.cards[2].card.card?.gridElements?.infoWithStyle?.restaurants ||
+      [];
 
     let array1 = [];
 
@@ -51,6 +50,7 @@ const Body = () => {
     //setRestaurants(json.data.card[5].)
   }
   console.log("render");
+  console.log("render2");
 
   //conditional rendering
   //If restraunt is empty =>shimmer ui
@@ -58,18 +58,23 @@ const Body = () => {
 
   // not render component (early return)
   if (!allRestaurants) return <h1> heolo</h1>;
-  if (filterRestaurants?.length === 0) {
-    return <h1>No REstraunt Match your FIlter !!</h1>;
-  }
+  // if (filterRestaurants?.length === 0) {
+  //   return <h1>No REstraunt Match your FIlter !!</h1>;
+  // }
+
+  // const isOnline = useOnline();
+  // if (!isOnline) {
+  //   return <h1> offline, please check your internet connection</h1>;
+  // }
 
   return allRestaurants.length === 0 ? (
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="p-5 bg-pink-100 my-5">
         <input
           type="text"
-          className="search-input"
+          className="focus:bg-yellow-200 p-2 m-2"
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
@@ -77,7 +82,7 @@ const Body = () => {
           }}
         />
         <button
-          className="search-btn"
+          className="p-2 m-2   bg-purple-700 hover:bg-gray-400 text-white rounded-xl"
           onClick={() => {
             //need to filter the data
             const data = filterData(searchText, allRestaurants);
@@ -87,8 +92,18 @@ const Body = () => {
         >
           Search
         </button>
+
+        <input
+          value={user?.name}
+          onChange={(e) => setUser({ ...user, name: e.target.value })}
+        ></input>
+
+        <input
+          value={user?.email}
+          onChange={(e) => setUser({ ...user, email: e.target.value })}
+        ></input>
       </div>
-      <div className="reatraunt-list">
+      <div className="flex flex-wrap bg-blue-100">
         {filterRestaurants.map((restaurant) => {
           return (
             <RestrauntCart {...restaurant.data} key={restaurant.data.id} />

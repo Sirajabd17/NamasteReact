@@ -1,6 +1,5 @@
 export const IMG_CDN_URL =
-  "https://tb-static.uber.com/prod/image-proc/processed_images/64d5b6cf0e05b04b99ff8ea0faee804f/c73ecc27d2a9eaa735b1ee95304ba588.jpeg";
-
+  "https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/";
 export const restrhhnnhauntList = [
   {
     type: "restaurant",
